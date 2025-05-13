@@ -29,6 +29,9 @@ Edit
   ├── models.py           # User, Project, Task classes
   ├── auth.py             # Login, registration, role-based access
   ├── manager.py          # Core logic for task/project operations
+
+
+  
 2. Frontend Module (GUI Interface)
 Handles:
 
