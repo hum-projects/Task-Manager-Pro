@@ -5,15 +5,16 @@ from tkinter import messagebox, simpledialog
 from task_ui import TaskUI
 
 class Dashboard(tk.Frame):
-    def __init__(self, master, username):
+    def __init__(self, master, username, role):
         super().__init__(master)
         self.master = master
         self.username = username
+        self.role = role
         self.projects = []  # Placeholder for project list
         self.create_widgets()
 
     def create_widgets(self):
-        tk.Label(self, text=f"Welcome, {self.username}", font=("Arial", 14)).pack(pady=10)
+        tk.Label(self, text=f"Welcome, {self.username} ({self.role})", font=("Arial", 14)).pack(pady=10)
 
         # Buttons for project actions
         tk.Button(self, text="Create Project", command=self.create_project).pack(pady=5)
