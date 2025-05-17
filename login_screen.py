@@ -1,6 +1,8 @@
 # Login and registration UI
+#2
 import tkinter as tk
 from tkinter import messagebox
+from dashboard import Dashboard
 
 class LoginScreen(tk.Frame):
     def __init__(self, master):
@@ -16,7 +18,7 @@ class LoginScreen(tk.Frame):
         self.username_entry.pack()
 
         tk.Label(self, text="Password").pack()
-        self.password_entry = tk.Entry(self, show="*")
+        self.password_entry = tk.Entry(self, show="*") 
         self.password_entry.pack()
 
         tk.Button(self, text="Login", command=self.login).pack(pady=10)
@@ -27,8 +29,9 @@ class LoginScreen(tk.Frame):
         password = self.password_entry.get()
         # Placeholder for backend call
         if username == "admin" and password == "admin":
-            messagebox.showinfo("Login Success", f"Welcome {username}")
-            # Import and open dashboard here
+            self.destroy()
+            dashboard = Dashboard(self.master, username)
+            dashboard.pack(fill="both", expand=True)
         else:
             messagebox.showerror("Login Failed", "Invalid credentials")
 
