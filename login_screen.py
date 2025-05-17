@@ -47,13 +47,14 @@ class LoginScreen(tk.Frame):
 
         conn = sqlite3.connect("collabmanager.db")
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+        cursor.execute("SELECT username, role FROM users WHERE username=? AND password=?", (username, password))
         user = cursor.fetchone()
         conn.close()
 
         if user:
+            username, role = user
             self.destroy()
-            dashboard = Dashboard(self.master, username)
+            dashboard = Dashboard(self.master, username, role)
             dashboard.pack(fill="both", expand=True)
         else:
             messagebox.showerror("Login Failed", "Invalid credentials")
