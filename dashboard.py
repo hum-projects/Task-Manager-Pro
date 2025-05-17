@@ -2,6 +2,7 @@
 #2
 import tkinter as tk
 from tkinter import messagebox, simpledialog
+from task_ui import TaskUI
 
 class Dashboard(tk.Frame):
     def __init__(self, master, username):
@@ -26,6 +27,8 @@ class Dashboard(tk.Frame):
 
         # Load mock data
         self.load_projects()
+        # View/manage tasks for a project
+        self.project_listbox.bind("<Double-Button-1>", self.open_task_ui)
 
     def load_projects(self):
         # Placeholder: should load from backend
@@ -47,3 +50,12 @@ class Dashboard(tk.Frame):
         if project_code:
             # Placeholder: verify and join via backend
             messagebox.showinfo("Joined", f"Joined project with code: {project_code}")
+
+    def open_task_ui(self, event):
+        selection = self.project_listbox.curselection()
+        if not selection:
+            return
+        project_name = self.project_listbox.get(selection[0])
+        self.destroy()
+        task_screen = TaskUI(self.master, project_name)
+        task_screen.pack(fill="both", expand=True)
