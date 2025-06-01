@@ -2,13 +2,17 @@
 #2
 import tkinter as tk
 from tkinter import messagebox, simpledialog
+from dashboard import Dashboard
+
 
 class TaskUI(tk.Frame):
-    def __init__(self, master, project_name):
+    def __init__(self, master, project_name, user_info):
         super().__init__(master)
         self.master = master
         self.project_name = project_name
-        self.tasks = []  # Placeholder for backend tasks
+        self.username = user_info["username"]
+        self.role = user_info["role"]
+        self.tasks = []  # Placeholder
         self.create_widgets()
 
     def create_widgets(self):
@@ -17,6 +21,7 @@ class TaskUI(tk.Frame):
         # Buttons
         tk.Button(self, text="Add Task", command=self.add_task).pack(pady=5)
         tk.Button(self, text="Mark as Complete", command=self.complete_task).pack(pady=5)
+        tk.Button(self, text="⬅ Back to Dashboard", command=self.back_to_dashboard).pack(pady=5)
 
         # Task list
         self.task_listbox = tk.Listbox(self)
@@ -52,3 +57,8 @@ class TaskUI(tk.Frame):
         self.tasks[index]["status"] = "Complete"
         self.load_tasks()
         messagebox.showinfo("Updated", "Task marked as complete.")
+
+    def back_to_dashboard(self):
+        self.destroy()
+        dashboard = Dashboard(self.master, self.username, self.role)
+        dashboard.pack(fill="both", expand=True)

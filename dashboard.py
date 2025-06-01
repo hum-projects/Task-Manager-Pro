@@ -3,6 +3,8 @@
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 from task_ui import TaskUI
+from task_ui import TaskUI
+
 
 class Dashboard(tk.Frame):
     def __init__(self, master, username, role):
@@ -58,5 +60,5 @@ class Dashboard(tk.Frame):
             return
         project_name = self.project_listbox.get(selection[0])
         self.destroy()
-        task_screen = TaskUI(self.master, project_name)
+        task_screen = TaskUI(self.master, project_name, {"username": self.username, "role": self.role})
         task_screen.pack(fill="both", expand=True)
