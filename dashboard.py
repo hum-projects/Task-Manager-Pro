@@ -24,6 +24,8 @@ class Dashboard(tk.Frame):
 
         self.load_projects()
 
+        tk.Button(self, text="Logout", command=self.logout).pack(pady=5)
+
     def load_projects(self):
         self.projects = ["Website Redesign", "Mobile App Launch"]
         self.project_listbox.delete(0, tk.END)
@@ -60,3 +62,9 @@ class Dashboard(tk.Frame):
             self.task_screen.destroy()
             self.task_screen = None
         self.pack(fill="both", expand=True)
+
+    def logout(self):
+        from login_screen import LoginScreen  # ⬅ Import only when needed
+        self.destroy()
+        login = LoginScreen(self.master)
+        login.pack(fill="both", expand=True)
